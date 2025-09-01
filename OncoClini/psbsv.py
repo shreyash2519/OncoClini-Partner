@@ -31,27 +31,34 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # === Splash Screen ===
+# === Splash Screen ===
 def get_base64_image(image_path):
     with open(image_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
+# ✅ Correct logo path inside OncoClini/
+current_dir = os.path.dirname(os.path.abspath(__file__))
+logo_path = os.path.join(current_dir, "assets", "logo.png")
+
 if "splash_done" not in st.session_state:
-    img_base64 = get_base64_image("assets/logo.png")
-    st.markdown(f"""
-        <style>
-        .splash {{
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: black;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999;
-        }}
-        .splash img {{ width: 100vw; height: 100vh; object-fit: cover; }}
-        </style>
-        <div class="splash"><img src="data:image/png;base64,{img_base64}" /></div>
-    """, unsafe_allow_html=True)
-    time.sleep(5)
-    st.session_state.splash_done = True
-    st.rerun()
+    if os.path.exists(logo_path):
+        img_base64 = get_base64_image(logo_path)
+        st.markdown(f"""
+            <style>
+            .splash {{
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background-color: black;
+                display: flex; justify-content: center; align-items: center;
+                z-index: 9999;
+            }}
+            .splash img {{ width: 100vw; height: 100vh; object-fit: cover; }}
+            </style>
+            <div class="splash"><img src="data:image/png;base64,{img_base64}" /></div>
+        """, unsafe_allow_html=True)
+        time.sleep(5)
+        st.session_state.splash_done = True
+        st.rerun()
+
 # === App Title ===
 st.markdown(f"""
     <div style='text-align:center;'>
@@ -666,6 +673,7 @@ elif section == "Analysis":
                 word_data = generate_doc()
                 name = f"{st.session_state.file_prefix}_OncoClini_Report.docx"
                 st.sidebar.download_button("Download", word_data, file_name=name)
+
 
 
 
