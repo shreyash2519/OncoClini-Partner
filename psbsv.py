@@ -35,8 +35,12 @@ def get_base64_image(image_path):
     with open(image_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
+# Get absolute path of logo.png
+current_dir = os.path.dirname(__file__)
+logo_path = os.path.join(current_dir, "OncoClini", "assets", "logo.png")
+
 if "splash_done" not in st.session_state:
-    img_base64 = get_base64_image("OncoClini/assets/logo.png")
+    img_base64 = get_base64_image(logo_path)
     st.markdown(f"""
         <style>
         .splash {{
@@ -666,6 +670,7 @@ elif section == "Analysis":
                 word_data = generate_doc()
                 name = f"{st.session_state.file_prefix}_OncoClini_Report.docx"
                 st.sidebar.download_button("Download", word_data, file_name=name)
+
 
 
 
