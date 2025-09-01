@@ -36,7 +36,7 @@ def get_base64_image(image_path):
         return base64.b64encode(f.read()).decode()
 
 if "splash_done" not in st.session_state:
-    img_base64 = get_base64_image("assets/logo.png")
+    img_base64 = get_base64_image("OncoClini/assets/logo.png")
     st.markdown(f"""
         <style>
         .splash {{
@@ -666,6 +666,7 @@ elif section == "Analysis":
                 word_data = generate_doc()
                 name = f"{st.session_state.file_prefix}_OncoClini_Report.docx"
                 st.sidebar.download_button("Download", word_data, file_name=name)
+
 
 
 
