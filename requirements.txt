@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+lifelines
+textblob
+statsmodels
+python-docx
