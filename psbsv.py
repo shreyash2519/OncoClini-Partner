@@ -36,9 +36,9 @@ def get_base64_image(image_path):
     with open(image_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-# ✅ Use a single correct logo path
+# ✅ Use correct relative logo path
 current_dir = os.path.dirname(os.path.abspath(__file__))
-logo_path = os.path.join(current_dir, "assets", "logo.png")
+logo_path = os.path.join(current_dir, "Oncoclini", "assets", "logo.png")
 
 if "splash_done" not in st.session_state:
     if os.path.exists(logo_path):
@@ -58,6 +58,7 @@ if "splash_done" not in st.session_state:
         time.sleep(5)
         st.session_state.splash_done = True
         st.rerun()
+
 # === App Title ===
 st.markdown(f"""
     <div style='text-align:center;'>
@@ -672,6 +673,7 @@ elif section == "Analysis":
                 word_data = generate_doc()
                 name = f"{st.session_state.file_prefix}_OncoClini_Report.docx"
                 st.sidebar.download_button("Download", word_data, file_name=name)
+
 
 
 
